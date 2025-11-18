@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div align="center">
   
 # 🌐 Polkadot AI Mesh
