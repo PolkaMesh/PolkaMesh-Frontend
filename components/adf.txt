@@ -1,0 +1,220 @@
+# GitHub Copilot Prompt: Polkadot AI Mesh Landing Page
+
+Build a production-grade, human-designed landing page for "Polkadot AI Mesh" - a decentralized AI compute and data marketplace for Smart Cities and DeFi on the Polkadot ecosystem. This is a ₹30 crore project proposal requiring exceptional design quality.
+
+## Tech Stack
+- Next.js 14+ with TypeScript
+- TailwindCSS (already configured)
+- Lucide React for icons
+- Framer Motion for animations
+- React Intersection Observer for scroll animations
+- Class Variance Authority (CVA) for component variants
+
+## Design Philosophy - CRITICAL REQUIREMENTS
+
+### ❌ FORBIDDEN Design Elements
+- NO violet, pink, or dark blue gradients
+- NO typical AI-generated color schemes
+- NO generic gradient backgrounds
+- NO overly saturated neon colors
+- Design must look 0% AI-generated
+
+### ✅ Required Design Approach - DARK THEME (Polkasmesh Brand)
+- **Typography**: SF Pro Display, SF Pro Text (macOS system fonts) - use `font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif`
+- **Color Palette** (Based on Polkasmesh Branding):
+  - **Background**: Deep black/navy (#0A0B0D, #0D0E12, #000000)
+  - **Primary Accent**: Hot pink/magenta (#FF006E, #E6007A, #FF0080) - for CTAs, highlights, mesh graphics
+  - **Text Colors**: 
+    - Primary: Pure white (#FFFFFF) for headlines
+    - Secondary: Light gray (#A0A0A0, #8E8E93) for body text
+    - Muted: Dark gray (#5E5E5E) for subtle text
+  - **Mesh/Grid Visualization**: Hot pink (#FF006E) wireframe on dark background
+  - **Accent Colors**: 
+    - Polkadot pink variants for hover states
+    - Subtle purple tints (#8B5CF6) for secondary elements
+    - Deep charcoal (#1A1A1A) for card backgrounds
+- **Design References**: Apple.com (dark mode), Linear.app, Stripe.com, Vercel.com, Polkadot.network
+- **Layout**: Generous whitespace, asymmetric grids, large typography, minimal borders, dark glass morphism effects
+
+## Page Structure & User Flow
+
+### 1. Hero Section - POLKASMESH DARK THEME
+- Logo: "Polkasmesh" with wireframe mesh graphic (pink #FF006E on black)
+- Bold headline: "The Decentralized AI Compute & Data Mesh for Polkadot"
+- Subheadline: "Powering Smart Cities & DeFi" (in light gray)
+- Two CTAs: "Submit Proposal" (hot pink #FF006E background), "View Documentation" (outlined pink)
+- **Animated mesh network background**: 3D wireframe wave/mesh similar to logo (pink lines, black background)
+- Use the exact visual style from the Polkasmesh branding - wireframe mesh waves
+- Subtle parallax scroll effect on mesh background
+
+### 2. Problem Statement
+- "The Challenge" section
+- 3-column grid showing current limitations:
+  - Centralized AI compute bottlenecks
+  - Siloed smart city data
+  - MEV exploitation in DeFi
+- Use data visualization cards with hover states
+
+### 3. Solution Overview - "Polkadot AI Mesh"
+- 4 pillar cards (horizontal scroll on mobile):
+  1. Cross-Chain AI Compute Mesh
+  2. DePIN-Powered Smart City Data Layer
+  3. MEV-Resistant DeFi Analytics
+  4. AI Agent SDK for Builders
+- Each card: icon, title, 2-sentence description, "Learn more" link
+- Staggered fade-in animation on scroll
+
+### 4. How It Works - Interactive Flow
+- Step-by-step visualization with animated connectors
+- 5 steps:
+  1. Submit AI Job
+  2. Decentralized Compute Execution
+  3. Cross-Chain Payment via XCM
+  4. Privacy-Preserved Results
+  5. Smart City/DeFi Integration
+- Use timeline layout with interactive hover reveals
+
+### 5. Technical Architecture
+- Visual diagram showing tech stack layers:
+  - Compute Layer (Phala, Acurast)
+  - Data Layer (Robonomics, Centrifuge)
+  - Privacy Layer (ZKP, Aleph Zero)
+  - DeFi Layer (HydraDX, Polkadex)
+- Expandable sections for each component
+
+### 6. Use Cases - Three Personas
+- Three-column layout (stacked on mobile):
+  - **For Developers**: Deploy AI agents with SDK
+  - **For Smart Cities**: Monetize IoT data streams
+  - **For DeFi Users**: Access anti-MEV protection
+- Each with illustration, user flow diagram, and benefits list
+
+### 7. SDK Showcase
+- Code snippet viewer with syntax highlighting
+- Tabbed interface showing:
+  - TypeScript example
+  - Visual builder preview
+  - Integration examples
+- "Try SDK Playground" button
+
+### 8. Ecosystem Integrations
+- Logo grid of Polkadot ecosystem partners
+- Animated on scroll with subtle scale effects
+- Logos: Phala, Acurast, Robonomics, HydraDX, Polkadex, Aleph Zero
+
+### 9. Roadmap Timeline
+- Horizontal timeline with milestones
+- Phase 1: MVP Development
+- Phase 2: Testnet Launch
+- Phase 3: Mainnet & Partnerships
+- Phase 4: Global Expansion
+- Interactive dots with popup details
+
+### 10. Governance & Community
+- OpenGov integration explanation
+- Community voting mechanism showcase
+- "Join Discord" / "Follow Development" CTAs
+
+### 11. Footer
+- Multi-column layout:
+  - Product (Features, Documentation, SDK)
+  - Resources (GitHub, Whitepaper, Blog)
+  - Community (Discord, Twitter, Forum)
+  - Legal (Privacy, Terms)
+- Newsletter signup form
+- Social links with icons
+
+## Component Requirements
+
+### Navigation Bar - DARK THEME
+- Fixed/sticky on scroll with dark blur background (bg-black/80 backdrop-blur-xl)
+- Polkasmesh logo + wordmark (pink mesh icon + white text)
+- Links: Features, How It Works, Use Cases, SDK, Docs (white text, pink underline on hover)
+- "Submit Proposal" CTA button (hot pink #FF006E background, white text, glow effect)
+- Mobile hamburger menu with smooth slide-in (dark background, pink accent)
+
+### Reusable Components Needed - DARK THEME VARIANTS
+1. **Card Component**: Dark glass morphism (bg: #1A1A1A with 80% opacity, border: 1px pink glow), hover lift animation
+2. **Button Component**: 
+   - Primary: Hot pink (#FF006E) background, white text
+   - Secondary: Pink border (#FF006E), pink text, transparent background
+   - Ghost: White text, subtle hover pink tint
+3. **Section Container**: Max-width constraints, consistent padding, dark background
+4. **Animated Counter**: Pink (#FF006E) numbers for statistics/metrics
+5. **Gradient Border Card**: Pink-to-purple border glow animation
+6. **Code Block**: Dark syntax highlighting (VS Code dark+ theme) with pink accent, copy button
+7. **Timeline Component**: Vertical/horizontal responsive with pink connection lines
+8. **Modal**: Dark overlay with glass morphism card, pink accents
+
+## Animation Guidelines
+- Use Framer Motion for:
+  - Page transitions
+  - Scroll-triggered animations (useInView)
+  - Hover effects (scale, opacity)
+  - Staggered children animations
+- Keep animations subtle: 200-400ms duration
+- Ease curves: easeInOut for most, easeOut for exits
+- Reduce motion for accessibility (prefers-reduced-motion)
+
+## Responsive Breakpoints
+- Mobile: 0-640px (single column)
+- Tablet: 641-1024px (two columns)
+- Desktop: 1025px+ (multi-column, max-width 1440px)
+
+## Performance Requirements
+- Lazy load images and heavy components
+- Use Next.js Image component with blur placeholders
+- Code splitting for route optimization
+- Lighthouse score target: 95+ performance, 100 accessibility
+
+## File Structure
+```
+src/
+├── app/
+│   ├── page.tsx (main landing page)
+│   ├── layout.tsx
+│   └── globals.css
+├── components/
+│   ├── ui/ (reusable components)
+│   ├── sections/ (Hero, Features, HowItWorks, etc.)
+│   └── layout/ (Navbar, Footer)
+├── lib/
+│   └── utils.ts
+└── types/
+    └── index.ts
+```
+
+## Accessibility
+- Semantic HTML5 elements
+- ARIA labels for interactive elements
+- Keyboard navigation support
+- Focus visible styles
+- Alt text for all images
+- Color contrast ratio WCAG AAA
+
+## Content Tone
+- Professional yet innovative
+- Technical but accessible
+- Confidence without hype
+- Data-driven claims
+- Enterprise-grade positioning
+
+## Build Instructions
+1. Create all section components first
+2. Build reusable UI components with variants
+3. Implement animations progressively
+4. Test responsive behavior at each breakpoint
+5. Optimize images and assets
+6. Add meta tags and SEO optimization
+
+## Key Differentiators to Showcase
+- First Polkadot-native AI compute mesh
+- Real-world smart city applications
+- Privacy-first architecture
+- Cross-chain payment rails
+- Developer-friendly SDK
+- MEV protection built-in
+
+Generate production-ready code with proper TypeScript types, clean component architecture, and professional styling. Every component should feel hand-crafted, not template-generated. Prioritize visual hierarchy, whitespace, and subtle interactions that elevate the user experience.
+
+**FINAL CHECK**: Does the design look like it came from a world-class design agency? If not, refine until it matches the quality of Apple, Linear, or Stripe landing pages.

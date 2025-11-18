@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background-primary: #0A0A0F;
+    --background-secondary: #13131A;
+    --text-primary: #FFFFFF;
+    --text-secondary: #E0E0E0;
+    --accent-pink: #E6007A;
+    --accent-magenta: #FF006B;
+    --mesh-pink: #FF0080;
+    --glow-pink: 0 0 40px rgba(230, 0, 122, 0.6);
+    --glow-magenta: 0 0 60px rgba(255, 0, 128, 0.4);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #0A0A0F;
+    color: #E0E0E0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #FFFFFF;
+    text-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+  }
+
+  p, li, span {
+    color: #E0E0E0;
+  }
+}
+
+@layer components {
+  /* Pink glow pulse animation */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(230, 0, 122, 0.4); }
+    50% { box-shadow: 0 0 40px rgba(230, 0, 122, 0.8); }
+  }
+
+  /* Wireframe wave animation */
+  @keyframes meshWave {
+    0%, 100% { transform: translateY(0) rotateX(0deg); }
+    50% { transform: translateY(-10px) rotateX(5deg); }
+  }
+
+  /* Gradient text shimmer */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .glow-pink {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #FFFFFF 25%, #E6007A 50%, #FFFFFF 75%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* Dark glass card style */
+  .glass-card {
+    background: rgba(19, 19, 26, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(230, 0, 122, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(230, 0, 122, 0.6);
+    box-shadow: 0 12px 48px rgba(255, 0, 128, 0.3);
+    transform: translateY(-4px);
+  }
+
+  /* Pink glow button */
+  .btn-glow {
+    box-shadow: 0 0 30px rgba(230, 0, 122, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 50px rgba(230, 0, 122, 0.8);
+    transform: scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
