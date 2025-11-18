@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 <div align="center">
   
@@ -316,15 +315,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🔗 Links
 
-- **Website**: [https://mesh-polkadot.vercel.app](https://mesh-polkadot.vercel.app)
-- **GitHub**: [https://github.com/PolkaMesh/PolkaMesh_frontend](https://github.com/PolkaMesh/PolkaMesh_frontend)
-- **Documentation**: Coming Soon
-- **Twitter**: [@PolkaMesh](https://twitter.com/PolkaMesh)
-- **Discord**: [Join our community](https://discord.gg/polkamesh)
-
----
 
 ## 🙏 Acknowledgments
 
