@@ -29,12 +29,46 @@ export default function SubmitJobForm({ account, onJobSubmitted }: SubmitJobForm
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [demoMode, setDemoMode] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'success' | 'error' | null;
     message: string;
     jobId?: number;
     txHash?: string;
   }>({ type: null, message: '' });
+
+  // Demo submission for hackathon testing
+  const handleDemoSubmit = async () => {
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    // Simulate submission delay
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    const mockJobId = Math.floor(Math.random() * 10000) + 1;
+    const mockTxHash = '0x' + Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+
+    setSubmitStatus({
+      type: 'success',
+      message: `[DEMO] Job submitted successfully! Job ID: ${mockJobId}`,
+      jobId: mockJobId,
+      txHash: mockTxHash,
+    });
+
+    onJobSubmitted?.(mockJobId, mockTxHash);
+    setIsSubmitting(false);
+
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setFormData({
+        description: "",
+        budget: "",
+        computeType: "GPU",
+        estimatedRuntime: "",
+        isConfidential: false,
+      });
+    }, 3000);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,7 +139,28 @@ export default function SubmitJobForm({ account, onJobSubmitted }: SubmitJobForm
     }
   };
 
-  const isFormValid = formData.description && formData.budget && formData.estimatedRuntime && account;
+  // In demo mode, wallet connection is not required
+  const isFormValid = formData.description && formData.budget && formData.estimatedRuntime && (account || demoMode);
+
+  // Helper to show which fields are missing
+  const getMissingFields = () => {
+    const missing: string[] = [];
+    if (!account && !demoMode) missing.push('Connect wallet (or enable Demo Mode)');
+    if (!formData.description) missing.push('Job description');
+    if (!formData.budget) missing.push('Budget');
+    if (!formData.estimatedRuntime) missing.push('Estimated runtime');
+    return missing;
+  };
+
+  // Handle form submission - use demo or real based on mode
+  const onFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (demoMode) {
+      await handleDemoSubmit();
+    } else {
+      await handleSubmit(e);
+    }
+  };
 
   return (
     <motion.div
@@ -158,17 +213,47 @@ export default function SubmitJobForm({ account, onJobSubmitted }: SubmitJobForm
         </motion.div>
       )}
 
-      {/* Warning if wallet not connected */}
-      {!account && (
+      {/* Demo Mode Toggle */}
+      <div className="mb-6 p-4 bg-purple-500/10 border border-purple-500/30 rounded-xl">
+        <div className="flex items-center justify-between">
+          <div className="flex items-start gap-3">
+            <Zap className="w-5 h-5 text-purple-500 mt-0.5" />
+            <div>
+              <h4 className="text-purple-500 font-medium">Demo Mode</h4>
+              <p className="text-purple-500/70 text-sm">
+                Test the flow without real transactions or wallet
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setDemoMode(!demoMode)}
+            className={`relative w-14 h-8 rounded-full transition-all duration-300 ${
+              demoMode
+                ? "bg-gradient-to-r from-purple-500 to-purple-600 shadow-[0_0_15px_rgba(168,85,247,0.4)]"
+                : "bg-[#E0E0E0]/20"
+            }`}
+          >
+            <div
+              className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-all duration-300 shadow-lg ${
+                demoMode ? "left-7" : "left-1"
+              }`}
+            />
+          </button>
+        </div>
+      </div>
+
+      {/* Warning if wallet not connected and not in demo mode */}
+      {!account && !demoMode && (
         <div className="mb-6 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" />
           <p className="text-yellow-500 text-sm">
-            Please connect your wallet to submit a job
+            Please connect your wallet or enable Demo Mode to submit a job
           </p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={onFormSubmit} className="space-y-6">
         {/* Job Description */}
         <div>
           <label className="block text-white font-medium mb-3">
@@ -333,22 +418,32 @@ export default function SubmitJobForm({ account, onJobSubmitted }: SubmitJobForm
           disabled={!isFormValid || isSubmitting}
           className={`w-full flex items-center justify-center gap-3 px-8 py-4 text-white text-lg font-medium rounded-xl transition-all duration-300 ${
             isFormValid && !isSubmitting
-              ? "bg-gradient-to-r from-[#FF0080] to-[#E6007A] hover:scale-[1.02] shadow-[0_0_15px_rgba(230,0,122,0.3)] hover:shadow-[0_0_25px_rgba(230,0,122,0.5)]"
+              ? demoMode
+                ? "bg-gradient-to-r from-purple-500 to-purple-600 hover:scale-[1.02] shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]"
+                : "bg-gradient-to-r from-[#FF0080] to-[#E6007A] hover:scale-[1.02] shadow-[0_0_15px_rgba(230,0,122,0.3)] hover:shadow-[0_0_25px_rgba(230,0,122,0.5)]"
               : "bg-[#E0E0E0]/20 cursor-not-allowed"
           }`}
         >
           {isSubmitting ? (
             <>
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-              <span>Submitting to Blockchain...</span>
+              <span>{demoMode ? 'Simulating...' : 'Submitting to Blockchain...'}</span>
             </>
           ) : (
             <>
               <Send className="w-5 h-5" />
-              <span>Submit Job to Mesh</span>
+              <span>{demoMode ? 'Test Submit (Demo)' : 'Submit Job to Mesh'}</span>
             </>
           )}
         </button>
+
+        {/* Show missing fields hint */}
+        {!isFormValid && getMissingFields().length > 0 && (
+          <div className="text-center text-[#E0E0E0]/60 text-sm">
+            <span className="text-yellow-500">Missing: </span>
+            {getMissingFields().join(', ')}
+          </div>
+        )}
 
         <p className="text-[#E0E0E0]/60 text-xs text-center">
           By submitting, you agree to deposit funds in escrow. Payment will be released after job completion and attestation verification.
