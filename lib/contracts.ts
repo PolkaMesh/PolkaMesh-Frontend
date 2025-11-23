@@ -4,6 +4,14 @@
 export const PASEO_RPC = "wss://rpc1.paseo.popnetwork.xyz";
 export const BACKEND_API = "http://localhost:3000";
 
+// Phala Phat Contract Configuration
+export const PHALA_CONFIG = {
+  contractId: "app_4c48fd1fdbcf7495e90758c6b4108faf1205c3a3",
+  workerEndpoint: "https://phala-worker-api.phala.network",
+  clusterId: "poc6-testnet",
+  dashboardUrl: "https://cloud.phala.network/dashboard/cvms/app_4c48fd1fdbcf7495e90758c6b4108faf1205c3a3",
+} as const;
+
 export interface ContractInfo {
   name: string;
   address: string;
